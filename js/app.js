@@ -9,14 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let destinyOneFieldsCounter = 0;
 
-const destinyExpansionsAddFields = function (clickEvent) {
+const destinyExpansionsAddFields = function () {
     const destinyOneDiv = document.querySelector('#destiny-1-expansions');
     
     if (destinyOneFieldsCounter < 4) {
         //adding the new field and pushing it to the div container
         const destinyOneExpansionField = document.createElement('input');
         destinyOneExpansionField.setAttribute('type', Text)
-        destinyOneExpansionField.setAttribute('id', 'destiny-one-field' + '-' + destinyOneFieldsCounter)
+        destinyOneExpansionField.setAttribute('id', 'destiny-one-field-' + destinyOneFieldsCounter)
         destinyOneDiv.appendChild(destinyOneExpansionField);
 
         //adding the remove-field link, to remove the newly created field above
@@ -36,11 +36,17 @@ const destinyExpansionsAddFields = function (clickEvent) {
     }
     else {
         alert('Destiny 1 only had 4 expansions, nerd.');
-        clickEvent.reset();
     }
+
+    const destinyOneExpansionsField = document.querySelectorAll('#destiny-1-expansions');
     
+    destinyOneExpansionsField.forEach((newField) => {
+        newField.oninput = function (event) { //why does oninput work(?) here versus event listener?
+            
+        }
+        // newField.addEventListener('input', (fieldEvent) => {
+        //     console.dir(fieldEvent);
+        // })
+    })
+
 }
-
-// const destinyOneFieldEntry = function (event) {
-
-// }
