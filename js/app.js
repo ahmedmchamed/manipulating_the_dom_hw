@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const destinyOneExpansionsNumber = document.querySelector('#destiny-1-expansion-fields');
     destinyOneExpansionsNumber.addEventListener('click', destinyExpansionsAddFields);
 
-    // const destinyWeaponsRadio = document.querySelector('#destiny-form-weapons');
-    // destinyWeaponsRadio.addEventListener('change', destinyWeaponsRadioSelect);
+    const destinyOneExpansionsSubmit = document.querySelector('#destiny-1-expansions-form');
+    destinyOneExpansionsSubmit.addEventListener('submit', destinyOneFavouriteExpansions)
 
 })
 
@@ -66,13 +66,8 @@ const createFavouriteRaidsSelect = function () {
     destinyFormWrapper.appendChild(raidsList);
 };
 
-// const destinyWeaponsRadioSelect = function (event) {
-//     console.log(event.target.value);
-// }
-
 const destinyFavouritesCharactersSubmit = function (event) {
     event.preventDefault();
-    // console.dir(event);
 
     //declaring the result items to be put onto the ul
     const resultParagraph = document.querySelector('#destiny-favourites-form-result-paragraph');
@@ -136,15 +131,17 @@ const destinyFavouritesCharactersSubmit = function (event) {
 };
 
 let destinyOneFieldsCounter = 0;
-
 const destinyExpansionsAddFields = function () {
     const destinyOneDiv = document.querySelector('#destiny-1-expansions');
     
     if (destinyOneFieldsCounter < 4) {
         //adding the new field and pushing it to the div container
         const destinyOneExpansionField = document.createElement('input');
-        destinyOneExpansionField.setAttribute('type', Text)
+        // destinyOneExpansionField.setAttribute('type', Text)
+        destinyOneExpansionField.type = 'text';
+        destinyOneExpansionField.classList.add('destiny-1-expansions-class');
         destinyOneExpansionField.setAttribute('id', 'destiny-one-field-' + destinyOneFieldsCounter)
+        destinyOneExpansionField.setAttribute('name', 'destiny-one-field-' + destinyOneFieldsCounter)
         destinyOneDiv.appendChild(destinyOneExpansionField);
 
         //adding the remove-field link, to remove the newly created field above
@@ -153,12 +150,14 @@ const destinyExpansionsAddFields = function () {
         detinyOneExpansionDelete.href = "";
         detinyOneExpansionDelete.onclick = function (event) {
             event.preventDefault()
+            //delete link removes the added field
             destinyOneExpansionField.parentNode.removeChild(destinyOneExpansionField);
+            //delete link removes itself as well
             detinyOneExpansionDelete.parentNode.removeChild(detinyOneExpansionDelete);
         }
 
         //adding the anchor after the newly created field, using nextSibling.
-        destinyOneDiv.insertBefore(detinyOneExpansionDelete, destinyOneExpansionField.nextSibling)
+        destinyOneDiv.insertBefore(detinyOneExpansionDelete, destinyOneExpansionField.nextSibling);
 
         destinyOneFieldsCounter++;
     }
@@ -166,17 +165,48 @@ const destinyExpansionsAddFields = function () {
         alert('Destiny 1 only had 4 expansions, nerd.');
     }
 
-    const destinyOneExpansionsField = document.querySelectorAll('#destiny-1-expansions');
-    
-    destinyOneExpansionsField.forEach((newField) => {
-        newField.oninput = function (event) { //why does oninput work(?) here versus event listener?
-            if (event.target.value === "xur") {
-                const xurLink = document.createElement('a');
-                xurLink.textContent = `${event.target.value}'s link for more info`;
-                xurLink.href = "";
-                destinyOneResultsDiv = document.querySelector('#destiny-1-expansions-result');
-                destinyOneResultsDiv.appendChild(xurLink);
-            }
-        }
-    })
 };
+
+const destinyOneFavouriteExpansions = function (event) {
+    event.preventDefault();
+    const destinyExpansionsContainer = document.getElementsByClassName('destiny-1-expansions-class');
+    const destinyOneExpansionsUl = document.querySelector('#destiny-1-expansions-result-list');
+    
+    // console.log(event)
+    // console.dir(event);
+    let i;
+    for (i = 0; i < destinyExpansionsContainer.length; i++) {
+        const resultParagraph = document.querySelector('#destiny-1-expansions-result-paragraph');
+        const expansionList = document.createElement('li');
+        const destinyExpansionFieldId = `destiny-one-field-${i}`;
+        resultParagraph.textContent = `You've chosen the ${event.target[destinyExpansionFieldId].value} expansion as one of your favourites.`;
+        
+        const destinyExpansionsAnchorResult = document.createElement('a');
+        destinyExpansionsAnchorResult.href = '#';
+        destinyExpansionsAnchorResult.textContent = `Click for more info on the ${event.target[destinyExpansionFieldId].value} expansion.`;
+        destinyExpansionsAnchorResult.onclick = function () {
+            const destinyExpansionResultImg = document.createElement('img');
+            destinyExpansionResultImg.src = `public/${event.target[destinyExpansionFieldId].value.replace(/\s/g, '-').toLowerCase()}.png`;
+            destinyExpansionsAnchorResult.appendChild(destinyExpansionResultImg);
+        }
+        expansionList.appendChild(destinyExpansionsAnchorResult);
+        destinyOneExpansionsUl.appendChild(expansionList);
+        // console.log(event.target[`destiny-one-field-${i}`].value)
+    }
+
+    // const resultAnchorCharacters = document.createElement('a');
+    // resultAnchorCharacters.href = "#";
+    // resultAnchorCharacters.textContent = `Click for more info on ${event.target.favourite_characters.value}`;
+    // resultAnchorCharacters.onclick = function () {
+    //     const resultImgCharacters = document.createElement('img');
+    //     resultImgCharacters.src = `public/${event.target.favourite_characters.value.replace(/\s/g, '-').replace(/\'/g, '').toLowerCase()}.png`
+    //     resultAnchorCharacters.appendChild(resultImgCharacters);
+    // }
+    // resultListLinkCharacters.appendChild(resultAnchorCharacters);
+
+    // fieldsArray.forEach((valueString) => {
+    //     const expansionList = document.createElement('li');
+    //     expansionList.textContent = valueString;
+    //     destinyOneExpansionsUl.appendChild(expansionList);
+    // })
+}
