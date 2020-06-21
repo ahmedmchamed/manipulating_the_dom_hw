@@ -19,7 +19,7 @@ const createFavouriteCharactersSelect = function () {
     const characters = ['Xur', 'Petra Venj', 'Shaxx', 'Variks'];
 
     const charactersList = document.createElement('select');
-    charactersList.setAttribute('id', 'favourite-characters');
+    charactersList.setAttribute('id', 'favourite_characters');
 
     const disabledSelected = document.createElement('option');
     disabledSelected.disabled = true;
@@ -44,7 +44,7 @@ const createFavouriteRaidsSelect = function () {
     const raids = ['Vault of Glass', 'King\'s Fall', 'Leviathan', 'Last Wish'];
 
     const raidsList = document.createElement('select');
-    raidsList.setAttribute('id', 'favourite-raids');
+    raidsList.setAttribute('id', 'favourite_raids');
 
     const disabledSelected = document.createElement('option');
     disabledSelected.disabled = true;
@@ -69,12 +69,37 @@ const destinyFavouritesCharactersSubmit = function (event) {
     const resultParagraph = document.querySelector('#destiny-favourites-form-result-paragraph');
     const resultUnorderedList = document.querySelector('#destiny-favourites-form-result-list');
     const resultListSummaryCharacters = document.createElement('li');
-    const resultListLink = document.createElement('li');
+    const resultListLinkCharacters = document.createElement('li');
+    const resultListLinkRaids = document.createElement('li');
     
-    const resultImgCharacters = document.createElement('img');
-    resultImgCharacters.src = `public/${event.target['favourite-characters'].replace(/\s/g, '-').toLowerCase()}.png`
+    const resultAnchorCharacters = document.createElement('a');
+    resultAnchorCharacters.href = "#";
+    resultAnchorCharacters.textContent = `Click for more info on ${event.target.favourite_characters.value}`;
+    resultAnchorCharacters.onclick = function () {
+        const resultImgCharacters = document.createElement('img');
+        resultImgCharacters.src = `public/${event.target.favourite_characters.value.replace(/\s/g, '-').replace(/\'/g, '').toLowerCase()}.png`
+        resultAnchorCharacters.appendChild(resultImgCharacters);
+    }
+    resultListLinkCharacters.appendChild(resultAnchorCharacters);
 
-    resultParagraph.textContent = 
+    const resultAnchorRaids = document.createElement('a');
+    resultAnchorRaids.href = "#";
+    resultAnchorRaids.textContent = `Click for more info on ${event.target.favourite_raids.value}`;
+    resultAnchorRaids.onclick = function () {
+        const resultImgRaids = document.createElement('img');
+        resultImgRaids.src = `public/${event.target.favourite_raids.value.replace(/\s/g, '-').replace(/\'/g, '').toLowerCase()}.png`
+        resultAnchorRaids.appendChild(resultImgRaids);
+    }
+    resultListLinkRaids.appendChild(resultAnchorRaids);
+
+
+    resultParagraph.textContent = `
+    You chose ${event.target.favourite_characters.value} as your favourite character and 
+    ${event.target.favourite_raids.value} as your favourite raid.`
+    resultListSummaryCharacters.appendChild(resultParagraph);
+    
+    resultUnorderedList.appendChild(resultListSummaryCharacters);
+    resultUnorderedList.appendChild(resultListLinkCharacters);
 };
 
 let destinyOneFieldsCounter = 0;
