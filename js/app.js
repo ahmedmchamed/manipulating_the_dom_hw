@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //creating the select (favourite characters) tag for the form
     createFavouriteCharactersSelect();
     //creating the select (favourite raids) tag for the form
-
+    createFavouriteRaidsSelect();
 
     const destinyFavouriteCharactersForm = document.querySelector('#destiny-favourites-form');
     destinyFavouriteCharactersForm.addEventListener('submit', destinyFavouritesCharactersSubmit);
@@ -21,9 +21,16 @@ const createFavouriteCharactersSelect = function () {
     const charactersList = document.createElement('select');
     charactersList.setAttribute('id', 'favourite-characters');
 
+    const disabledSelected = document.createElement('option');
+    disabledSelected.disabled = true;
+    disabledSelected.selected = true;
+    disabledSelected.value = 'expand-characters';
+    disabledSelected.textContent = 'Expand characters';
+    charactersList.appendChild(disabledSelected);
+
     characters.forEach((character) => {
         let characterOption = document.createElement('option');
-        characterOption.value = character.replace(/\s/g, '-').toLowerCase();
+        characterOption.value = character; //.replace(/\s/g, '-').toLowerCase();
         characterOption.textContent = character;
         charactersList.appendChild(characterOption);
     })
@@ -37,20 +44,37 @@ const createFavouriteRaidsSelect = function () {
     const raids = ['Vault of Glass', 'King\'s Fall', 'Leviathan', 'Last Wish'];
 
     const raidsList = document.createElement('select');
+    raidsList.setAttribute('id', 'favourite-raids');
+
+    const disabledSelected = document.createElement('option');
+    disabledSelected.disabled = true;
+    disabledSelected.selected = true;
+    disabledSelected.value = 'expand-raids';
+    disabledSelected.textContent = 'Expand raids';
+    raidsList.appendChild(disabledSelected);
 
     raids.forEach((raid) => {
         let raidOption = document.createElement('option');
         raidOption.textContent = raid;
-        raidOption.value = raid.replace(/\s/g, '-').toLowerCase();
+        raidOption.value = raid; //.replace(/\s/g, '-').toLowerCase();
         raidsList.appendChild(raidOption);
     })
 
     destinyFormWrapper.appendChild(raidsList);
-
 };
 
 const destinyFavouritesCharactersSubmit = function (event) {
+    event.preventDefault();
+    // console.dir(event);
+    const resultParagraph = document.querySelector('#destiny-favourites-form-result-paragraph');
+    const resultUnorderedList = document.querySelector('#destiny-favourites-form-result-list');
+    const resultListSummaryCharacters = document.createElement('li');
+    const resultListLink = document.createElement('li');
     
+    const resultImgCharacters = document.createElement('img');
+    resultImgCharacters.src = `public/${event.target['favourite-characters'].replace(/\s/g, '-').toLowerCase()}.png`
+
+    resultParagraph.textContent = 
 };
 
 let destinyOneFieldsCounter = 0;
