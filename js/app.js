@@ -193,20 +193,4 @@ const destinyOneFavouriteExpansions = function (event) {
         destinyOneExpansionsUl.appendChild(expansionList);
         // console.log(event.target[`destiny-one-field-${i}`].value)
     }
-
-    // const resultAnchorCharacters = document.createElement('a');
-    // resultAnchorCharacters.href = "#";
-    // resultAnchorCharacters.textContent = `Click for more info on ${event.target.favourite_characters.value}`;
-    // resultAnchorCharacters.onclick = function () {
-    //     const resultImgCharacters = document.createElement('img');
-    //     resultImgCharacters.src = `public/${event.target.favourite_characters.value.replace(/\s/g, '-').replace(/\'/g, '').toLowerCase()}.png`
-    //     resultAnchorCharacters.appendChild(resultImgCharacters);
-    // }
-    // resultListLinkCharacters.appendChild(resultAnchorCharacters);
-
-    // fieldsArray.forEach((valueString) => {
-    //     const expansionList = document.createElement('li');
-    //     expansionList.textContent = valueString;
-    //     destinyOneExpansionsUl.appendChild(expansionList);
-    // })
 }
