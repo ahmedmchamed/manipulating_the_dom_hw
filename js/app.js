@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const destinyOneExpansionsNumber = document.querySelector('#destiny-1-expansion-fields');
     destinyOneExpansionsNumber.addEventListener('click', destinyExpansionsAddFields);
 
+    // const destinyWeaponsRadio = document.querySelector('#destiny-form-weapons');
+    // destinyWeaponsRadio.addEventListener('change', destinyWeaponsRadioSelect);
+
 })
 
 const createFavouriteCharactersSelect = function () {
@@ -63,15 +66,21 @@ const createFavouriteRaidsSelect = function () {
     destinyFormWrapper.appendChild(raidsList);
 };
 
+// const destinyWeaponsRadioSelect = function (event) {
+//     console.log(event.target.value);
+// }
+
 const destinyFavouritesCharactersSubmit = function (event) {
     event.preventDefault();
     // console.dir(event);
+
     const resultParagraph = document.querySelector('#destiny-favourites-form-result-paragraph');
     const resultUnorderedList = document.querySelector('#destiny-favourites-form-result-list');
     const resultListSummaryCharacters = document.createElement('li');
     const resultListLinkCharacters = document.createElement('li');
     const resultListLinkRaids = document.createElement('li');
     
+    //creating anchor and img for chosen character
     const resultAnchorCharacters = document.createElement('a');
     resultAnchorCharacters.href = "#";
     resultAnchorCharacters.textContent = `Click for more info on ${event.target.favourite_characters.value}`;
@@ -82,6 +91,7 @@ const destinyFavouritesCharactersSubmit = function (event) {
     }
     resultListLinkCharacters.appendChild(resultAnchorCharacters);
 
+    //creating anchor and img for chosen raid
     const resultAnchorRaids = document.createElement('a');
     resultAnchorRaids.href = "#";
     resultAnchorRaids.textContent = `Click for more info on ${event.target.favourite_raids.value}`;
@@ -92,14 +102,22 @@ const destinyFavouritesCharactersSubmit = function (event) {
     }
     resultListLinkRaids.appendChild(resultAnchorRaids);
 
-
     resultParagraph.textContent = `
     You chose ${event.target.favourite_characters.value} as your favourite character and 
     ${event.target.favourite_raids.value} as your favourite raid.`
     resultListSummaryCharacters.appendChild(resultParagraph);
+
+    const destinyWeaponsRadio = document.getElementsByName('destiny-weapons');
+    destinyWeaponsRadio.forEach((radio) => {
+        if (radio.checked) {
+            console.log(radio.value);
+        }
+    })
     
+    //appending the each li for the characters and raids links to the ul
     resultUnorderedList.appendChild(resultListSummaryCharacters);
     resultUnorderedList.appendChild(resultListLinkCharacters);
+    resultUnorderedList.appendChild(resultListLinkRaids);
 };
 
 let destinyOneFieldsCounter = 0;
