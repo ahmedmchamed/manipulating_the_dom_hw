@@ -74,11 +74,13 @@ const destinyFavouritesCharactersSubmit = function (event) {
     event.preventDefault();
     // console.dir(event);
 
+    //declaring the result items to be put onto the ul
     const resultParagraph = document.querySelector('#destiny-favourites-form-result-paragraph');
     const resultUnorderedList = document.querySelector('#destiny-favourites-form-result-list');
     const resultListSummaryCharacters = document.createElement('li');
     const resultListLinkCharacters = document.createElement('li');
     const resultListLinkRaids = document.createElement('li');
+    const resultListLinkWeapons = document.createElement('li');;
     
     //creating anchor and img for chosen character
     const resultAnchorCharacters = document.createElement('a');
@@ -102,22 +104,35 @@ const destinyFavouritesCharactersSubmit = function (event) {
     }
     resultListLinkRaids.appendChild(resultAnchorRaids);
 
-    resultParagraph.textContent = `
-    You chose ${event.target.favourite_characters.value} as your favourite character and 
-    ${event.target.favourite_raids.value} as your favourite raid.`
-    resultListSummaryCharacters.appendChild(resultParagraph);
-
-    const destinyWeaponsRadio = document.getElementsByName('destiny-weapons');
-    destinyWeaponsRadio.forEach((radio) => {
+    //creating anchor and img for chosen weapon
+    const resultAnchorWeapons = document.createElement('a');
+    const destinyWeaponsRadioSelect = document.getElementsByName('destiny-weapons');
+    let weaponName;
+    destinyWeaponsRadioSelect.forEach((radio) => {
         if (radio.checked) {
-            console.log(radio.value);
+            weaponName = radio.value;
+            resultAnchorWeapons.href = '#';
+            resultAnchorWeapons.textContent = `Click for more info on ${radio.value}`;
+            resultAnchorWeapons.onclick = function () {
+                resultImgWeapons = document.createElement('img');
+                resultImgWeapons.src = `public/${radio.value.replace(/\s/g, '-').toLowerCase()}.png`;
+                resultAnchorWeapons.appendChild(resultImgWeapons);
+            }
         }
     })
+    resultListLinkWeapons.appendChild(resultAnchorWeapons);
+
+    //Output for the result paragraph
+    resultParagraph.textContent = `
+    You chose ${event.target.favourite_characters.value} as your favourite character, 
+    ${event.target.favourite_raids.value} as your favourite raid and ${weaponName} as your favourite weapon.`
+    resultListSummaryCharacters.appendChild(resultParagraph);
     
     //appending the each li for the characters and raids links to the ul
     resultUnorderedList.appendChild(resultListSummaryCharacters);
     resultUnorderedList.appendChild(resultListLinkCharacters);
     resultUnorderedList.appendChild(resultListLinkRaids);
+    resultUnorderedList.appendChild(resultListLinkWeapons);
 };
 
 let destinyOneFieldsCounter = 0;
