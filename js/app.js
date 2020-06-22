@@ -176,10 +176,23 @@ const destinyOneFavouriteExpansions = function (event) {
     // console.dir(event);
     let i;
     for (i = 0; i < destinyExpansionsContainer.length; i++) {
-        const resultParagraph = document.querySelector('#destiny-1-expansions-result-paragraph');
+        const expansionParagraphResults = document.createElement('p');
+        const expansionParagraphContainer = document.querySelector('#destiny-1-expansions-result-paragraphs');
         const expansionList = document.createElement('li');
         const destinyExpansionFieldId = `destiny-one-field-${i}`;
-        resultParagraph.textContent = `You've chosen the ${event.target[destinyExpansionFieldId].value} expansion as one of your favourites.`;
+        switch (i) {
+            case 0:
+                expansionParagraphResults.textContent = `You've chosen the ${event.target[destinyExpansionFieldId].value} 
+                expansion as one of your favourites.`;
+                expansionParagraphContainer.appendChild(expansionParagraphResults);
+                break;
+            default:
+                expansionParagraphResults.textContent = `You've also chosen the ${event.target[destinyExpansionFieldId].value} 
+                expansion as one of your favourites.`;
+                expansionParagraphContainer.appendChild(expansionParagraphResults);
+                break;
+        }
+        // resultParagraph.textContent = `You've chosen the ${event.target[destinyExpansionFieldId].value} expansion as one of your favourites.`;
         
         const destinyExpansionsAnchorResult = document.createElement('a');
         destinyExpansionsAnchorResult.href = '#';
