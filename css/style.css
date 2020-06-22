@@ -1,0 +1,23 @@
+div.body-wrapper {
+    display: grid;
+    font-family: sans-serif;
+    grid-template-columns: 1fr;
+    padding-left: 120px;
+    padding-right: 120px;
+    align-content: center;
+}
+
+img {
+    display: flex;
+    justify-content: space-evenly;
+    width: 150px;
+    height: 120px;
+    border-radius: 5px;
+}
+
+#destiny-1-expansions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 250px;
+}
+

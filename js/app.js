@@ -5,17 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
     //creating the select (favourite raids) tag for the form
     createFavouriteRaidsSelect();
 
-    const destinyFavouriteCharactersForm = document.querySelector('#destiny-favourites-form');
-    destinyFavouriteCharactersForm.addEventListener('submit', destinyFavouritesCharactersSubmit);
+    const destinyFavouritesForm = document.querySelector('#destiny-favourites-form');
+    destinyFavouritesForm.addEventListener('submit', destinyFavouritesCharactersSubmit);
 
-    const destinyOneExpansionsNumber = document.querySelector('#destiny-1-expansion-fields');
-    destinyOneExpansionsNumber.addEventListener('click', destinyExpansionsAddFields);
+    const destinyAddExpansionFields = document.querySelector('#destiny-1-expansion-fields');
+    destinyAddExpansionFields.addEventListener('click', destinyExpansionsAddFields);
 
     const destinyOneExpansionsSubmit = document.querySelector('#destiny-1-expansions-form');
     destinyOneExpansionsSubmit.addEventListener('submit', destinyOneFavouriteExpansions)
 
 })
 
+//creating the select tag for favourite characters
 const createFavouriteCharactersSelect = function () {
     const destinyFormWrapper = document.querySelector('#destiny-form-characters');
 
@@ -41,6 +42,7 @@ const createFavouriteCharactersSelect = function () {
     destinyFormWrapper.appendChild(charactersList);
 };
 
+//creating the select tag for favourite raids
 const createFavouriteRaidsSelect = function () {
     const destinyFormWrapper = document.querySelector('#destiny-form-raids');
 
@@ -169,41 +171,40 @@ const destinyExpansionsAddFields = function () {
 
 const destinyOneFavouriteExpansions = function (event) {
     event.preventDefault();
+    //using getElementsByClassName to get around static node list.
     const destinyExpansionsContainer = document.getElementsByClassName('destiny-1-expansions-class');
     const destinyOneExpansionsUl = document.querySelector('#destiny-1-expansions-result-list');
     
-    // console.log(event)
-    // console.dir(event);
     let i;
     for (i = 0; i < destinyExpansionsContainer.length; i++) {
         const expansionParagraphResults = document.createElement('p');
         const expansionParagraphContainer = document.querySelector('#destiny-1-expansions-result-paragraphs');
         const expansionList = document.createElement('li');
         const destinyExpansionFieldId = `destiny-one-field-${i}`;
+        
         switch (i) {
             case 0:
-                expansionParagraphResults.textContent = `You've chosen the ${event.target[destinyExpansionFieldId].value} 
+                expansionParagraphResults.textContent = `You've chosen the '${event.target[destinyExpansionFieldId].value}' 
                 expansion as one of your favourites.`;
                 expansionParagraphContainer.appendChild(expansionParagraphResults);
                 break;
             default:
-                expansionParagraphResults.textContent = `You've also chosen the ${event.target[destinyExpansionFieldId].value} 
+                expansionParagraphResults.textContent = `You've also chosen the '${event.target[destinyExpansionFieldId].value}' 
                 expansion as one of your favourites.`;
                 expansionParagraphContainer.appendChild(expansionParagraphResults);
                 break;
         }
-        // resultParagraph.textContent = `You've chosen the ${event.target[destinyExpansionFieldId].value} expansion as one of your favourites.`;
         
         const destinyExpansionsAnchorResult = document.createElement('a');
         destinyExpansionsAnchorResult.href = '#';
-        destinyExpansionsAnchorResult.textContent = `Click for more info on the ${event.target[destinyExpansionFieldId].value} expansion.`;
+        destinyExpansionsAnchorResult.textContent = `Click for more info on the '${event.target[destinyExpansionFieldId].value}' expansion.`;
         destinyExpansionsAnchorResult.onclick = function () {
             const destinyExpansionResultImg = document.createElement('img');
             destinyExpansionResultImg.src = `public/${event.target[destinyExpansionFieldId].value.replace(/\s/g, '-').toLowerCase()}.png`;
             destinyExpansionsAnchorResult.appendChild(destinyExpansionResultImg);
         }
+
         expansionList.appendChild(destinyExpansionsAnchorResult);
         destinyOneExpansionsUl.appendChild(expansionList);
-        // console.log(event.target[`destiny-one-field-${i}`].value)
     }
 }

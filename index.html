@@ -3,42 +3,55 @@
         <meta charset="utf-8">
         <title>Destiny Expansions</title>
         <script src="js/app.js"></script>
-        <link src="stylesheet" type="text/css" media="screen" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
     </head>
     <body>
-        <h2 id="main-heading">You can choose some of your favourite items in Destiny</h2>
+        <div class="body-wrapper">
+            <h2 id="main-heading">You can choose some of your favourite items in Destiny</h2>
         
-        <form id="destiny-favourites-form">
-            <p>Do you have any favourite characters?</p>
-            <div id="destiny-form-characters"></div>
-            <p>Any favourite raids?</p>
-            <div id="destiny-form-raids"></div>
-            <p>Any favourite weapons?</p>
-            <div id="destiny-form-weapons">
-                <input type="radio" id="gjallarhorn" name="destiny-weapons" value="Gjallarhorn">
-                <label for="gjallarhorn">Gjallarhorn</label>
-                <input type="radio" id="graviton-lance" name="destiny-weapons" value="Graviton Lance">
-                <label for="graviton-lance">Graviton Lance</label>
-                <input type="radio" id="hawkmoon" name="destiny-weapons" value="Hawkmoon">
-                <label for="hawkmoon">Hawkmoon</label>
+            <div class="first-form">
+                <form id="destiny-favourites-form">
+                    <p>Do you have any favourite characters?</p>
+                    <div id="destiny-form-characters"></div>
+                    <p>Any favourite raids?</p>
+                    <div id="destiny-form-raids"></div>
+                    <p>Any favourite weapons?</p>
+                    <div id="destiny-form-weapons">
+                        <input type="radio" id="gjallarhorn" name="destiny-weapons" value="Gjallarhorn">
+                        <label for="gjallarhorn">Gjallarhorn</label>
+                        <input type="radio" id="graviton-lance" name="destiny-weapons" value="Graviton Lance">
+                        <label for="graviton-lance">Graviton Lance</label>
+                        <input type="radio" id="hawkmoon" name="destiny-weapons" value="Hawkmoon">
+                        <label for="hawkmoon">Hawkmoon</label>
+                    </div>
+                    <p></p>
+                    <button type="submit" id="destiny-favourites-form-submit">Submit</button>
+                </form>
             </div>
-            <p></p>
-            <button type="submit" id="destiny-favourites-form-submit">Submit</button>
-        </form>
         
-        <p id="destiny-favourites-form-result-paragraph"></p>
-        <ul id="destiny-favourites-form-result-list"></ul>
-        
-        <h2 id="destiny-1-heading">Your favourite expansions from Destiny 1</h2>
-        <p>Enter how many items you would like to add.</p>
-        <button id="destiny-1-expansion-fields" type="button">Add field</button>
-        
-        <form id="destiny-1-expansions-form">
-            <div id="destiny-1-expansions"></div>
-            <p></p>
-            <button type="submit">Submit</button>
-        </form>
-        <div id="destiny-1-expansions-result-paragraphs"></div>
-        <ul id="destiny-1-expansions-result-list"></ul>
+            <div class="first-form-results">
+                <p id="destiny-favourites-form-result-paragraph"></p>
+                <ul id="destiny-favourites-form-result-list"></ul>
+            </div>
+
+            <h2 id="destiny-1-heading">Tell us your favourite expansions from Destiny 1</h2>
+            <div class="second-form-description">
+                <p>Enter how many items you would like to add (maximum of 4).</p>
+                <p>Some of Destiny 1's expansions include 'The Dark Below', 'House of Wolves', 'The Taken King' and 'Rise of Iron'.</p>
+                <button id="destiny-1-expansion-fields" type="button">Add field</button>
+            </div>
+            <hr>
+            <div class="second-form">
+                <form id="destiny-1-expansions-form">
+                    <div id="destiny-1-expansions"></div>
+                    <p></p>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="second-form-results">
+                <div id="destiny-1-expansions-result-paragraphs"></div>
+                <ul id="destiny-1-expansions-result-list"></ul>
+            </div>
+        </div>
     </body>
 </html>
