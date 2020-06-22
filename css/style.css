@@ -10,8 +10,8 @@ div.body-wrapper {
 img {
     display: flex;
     justify-content: space-evenly;
-    width: 150px;
-    height: 120px;
+    width: 190px;
+    height: 160px;
     border-radius: 5px;
 }
 
